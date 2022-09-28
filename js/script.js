@@ -22,13 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
             Середня швидкість - ${this.averageSpeed} км/год., 
             Обєм баку - ${this.fuelTankVolume} літрів, 
             Витрата палива - ${this.averageFuelConsumption} літрів на 100км.,
-            Водій - ${this.drivers},
-            Другий водій - ${this.newDrivers}`);
+            Водій - ${this.drivers}`);
         },
 
         // -Додавання ім’я водія у список.
-        addDrivers: function (drivers) {
-            this.addDrivers = drivers;
+        addDrivers: function (obj, key) {
+            obj[key] += ', ' + prompt('Введіть імя водія, яке необхідно додати', '')
         },
 
         // -Перевірка водія на наявність його ім’я у списку.
@@ -49,12 +48,13 @@ document.addEventListener('DOMContentLoaded', () => {
             fuel = Math.ceil((distance / 100) * fuel);
             let time = (distance / this['averageSpeed']);
             time = Math.floor(time + (time / 4));
-            return console.log(`Тобі потрібно ${fuel} літрів палива. Дану відстань ти подолаєш за ${time} годин`);
+            return console.log(`Тобі потрібно ${fuel} літрів палива.Дану відстань ти подолаєш за ${time} годин`);
         },
     };
 
     car.info();
-    console.log(car.addDrivers('Vasya'));
+    car.addDrivers(car, 'drivers');
+    car.info();
     console.log(car.reviewDriver('Tanya'));
     console.log(car.reviewDriver('Sasha'));
     car.calc(1500);
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Для виведення часу на екран.
         showTime: function () {
-            return console.log(`${this.hours}:${this.minutes}:${this.seconds}`)
+            return console.log(`${this.hours}: ${this.minutes}: ${this.seconds}`)
         },
 
         // Зміни часу на передану кількість секунд.
@@ -81,9 +81,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (seconds >= 60 && seconds < 3600) {
                 time.minutes = time.minutes + Math.floor(seconds / 60);
                 seconds = seconds % 60;
-                return console.log(`Даний час ${time.hours}:${time.minutes}:${seconds}`)
+                return console.log(`Даний час ${time.hours}: ${time.minutes}: ${seconds}`)
             } else {
-                return console.log(`Даний час ${time.hours}:${time.minutes}:${seconds}`)
+                return console.log(`Даний час ${time.hours}: ${time.minutes}: ${seconds}`)
             }
         },
 
@@ -94,9 +94,9 @@ document.addEventListener('DOMContentLoaded', () => {
             } else if (minutes >= 60 && minutes < 1440) {
                 time.hours = time.hours + Math.floor(minutes / 60);
                 minutes = minutes % 60;
-                return console.log(`Даний час ${time.hours}:${minutes}:${time.seconds}`)
+                return console.log(`Даний час ${time.hours}: ${minutes}: ${time.seconds}`)
             } else {
-                return console.log(`Даний час ${time.hours}:${minutes}:${time.seconds}`)
+                return console.log(`Даний час ${time.hours}: ${minutes}: ${time.seconds}`)
             }
         },
 
@@ -111,15 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
         changeHours: function (hours) {
             if (hours >= 24) {
                 hours = hours % 24;
-                return console.log(`Даний час ${hours}:${time.minutes}:${time.seconds}`)
+                return console.log(`Даний час ${hours}: ${time.minutes}: ${time.seconds}`)
             } else {
-                return console.log(`Даний час ${hours}:${time.minutes}:${time.seconds}`)
+                return console.log(`Даний час ${hours}: ${time.minutes}: ${time.seconds}`)
             }
         },
     };
     time.showTime();
     time.changeSeconds(58);
-    time.changeSeconds(150);
+    time.changeSeconds(8);
     time.changeMinutes(1);
     time.changeMinutes(75);
     time.changeHours(12);
@@ -156,6 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+
+
+
+
+
+    
     // Задача.
     // Создайте фунцию filterRange(arr, a, b), которая принимает массив чисел arr и возвращает новый массив, 
     // который содержит только числа из arr из диапазона от a до b.
